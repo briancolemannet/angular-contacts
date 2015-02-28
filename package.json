@@ -1,0 +1,16 @@
+{
+  "name": "angular-contacts",
+  "version": "0.0.1",
+  "description": "A project used to show how to integrate Angular in a simple contact application",
+  "main": "server.js",
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "sample"
+  ],
+  "author": "Brian Coleman <me@briancoleman.net>",
+  "license": "MIT",
+  "dependencies": {
+    "node-static": "^0.7.6"
+  }
+}
