@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="contactsApp" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,9 +38,12 @@
         </div>
     </div>
 </nav>
-
 <div class="container" id="MainContent">
     <div class="row">
+        <h1>
+            {{ 5*6 }}
+        </h1>
+
         <div class="col-sm-offset-1 col-sm-10">
             <table class="table table-striped">
                 <thead>
@@ -80,6 +83,13 @@
 <!-- The JavaScripts -->
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="lib/angular/angular.min.js"></script>
+
+<script>
+    (function () {
+        angular.module("contactsApp", []);
+    })();
+</script>
 
 </body>
 </html>
