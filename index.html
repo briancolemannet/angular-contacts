@@ -40,10 +40,6 @@
 </nav>
 <div class="container" id="MainContent" ng-controller="ContactListController as vm">
     <div class="row">
-        <h1>
-            {{ vm.message }}
-        </h1>
-
         <div class="col-sm-offset-1 col-sm-10">
             <table class="table table-striped">
                 <thead>
@@ -56,23 +52,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Joe</td>
-                    <td>Shmoe</td>
-                    <td>(811) 555-4578</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Sarah</td>
-                    <td>Johnson</td>
-                    <td>(555) 123-4578</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Alison</td>
-                    <td>Picket</td>
-                    <td>(456) 777-8888</td>
+                <tr ng-repeat="contact in vm.contacts">
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.firstName }}</td>
+                    <td>{{ contact.lastName }}</td>
+                    <td>{{ contact.phone }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -96,8 +80,28 @@
 
             init();
 
-            function init(){
-                vm.message = 7*6;
+            function init() {
+                vm.message = 7 * 6;
+                vm.contacts = [
+                    {
+                        id: 1,
+                        firstName: "Joe",
+                        lastName: "Shmoe",
+                        phone: "(555) 123-4567"
+                    },
+                    {
+                        id: 2,
+                        firstName: "Sarah",
+                        lastName: "Samson",
+                        phone: "(555) 444-3333"
+                    },
+                    {
+                        id: 3,
+                        firstName: "Elijah",
+                        lastName: "Wood",
+                        phone: "(999) 888-7777"
+                    }
+                ];
             }
         }
     })();
