@@ -38,10 +38,10 @@
         </div>
     </div>
 </nav>
-<div class="container" id="MainContent">
+<div class="container" id="MainContent" ng-controller="ContactListController as vm">
     <div class="row">
         <h1>
-            {{ 5*6 }}
+            {{ vm.message }}
         </h1>
 
         <div class="col-sm-offset-1 col-sm-10">
@@ -87,7 +87,19 @@
 
 <script>
     (function () {
-        angular.module("contactsApp", []);
+        angular.module("contactsApp", [])
+
+                .controller("ContactListController", [ContactListController]);
+
+        function ContactListController() {
+            var vm = this;
+
+            init();
+
+            function init(){
+                vm.message = 7*6;
+            }
+        }
     })();
 </script>
 
