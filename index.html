@@ -70,6 +70,7 @@
 <script src="lib/angular/angular.min.js"></script>
 
 <script>
+
     (function () {
         angular.module("contactsApp", [])
 
@@ -85,43 +86,37 @@
             init();
 
             function init() {
-                vm.contacts = contactsService.getContacts();
+                contactsService.getContacts(function (data) {
+                    vm.contacts = data;
+                });
             }
         }
 
-        function contactsService() {
+        contactsService.$inject = ["$http"];
+
+        function contactsService($http) {
             var service = {
                 getContacts: getContacts
             };
 
-            var contacts = [
-                {
-                    id: 1,
-                    firstName: "Joe",
-                    lastName: "Shmoe",
-                    phone: "(555) 123-4567"
-                },
-                {
-                    id: 2,
-                    firstName: "Sarah",
-                    lastName: "Samson",
-                    phone: "(555) 444-3333"
-                },
-                {
-                    id: 3,
-                    firstName: "Elijah",
-                    lastName: "Wood",
-                    phone: "(999) 888-7777"
-                }
-            ];
+            var contacts = null;
 
             return service;
 
-            function getContacts() {
-                return contacts;
+            function getContacts(successCallback) {
+                if (angular.isFunction(successCallback)) {
+                    if (!contacts) {
+                        $http.get("/data/contacts.json").then(function (response) {
+                            contacts = response.data;
+                            successCallback(contacts);
+                        })
+                    }
+                    successCallback(contacts);
+                }
             }
         }
     })();
+
 </script>
 
 </body>
