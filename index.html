@@ -73,35 +73,52 @@
     (function () {
         angular.module("contactsApp", [])
 
-                .controller("ContactListController", [ContactListController]);
+                .controller("ContactListController", ContactListController)
 
-        function ContactListController() {
+                .factory("contactsService", contactsService);
+
+        ContactListController.$inject = ["contactsService"];
+
+        function ContactListController(contactsService) {
             var vm = this;
 
             init();
 
             function init() {
-                vm.message = 7 * 6;
-                vm.contacts = [
-                    {
-                        id: 1,
-                        firstName: "Joe",
-                        lastName: "Shmoe",
-                        phone: "(555) 123-4567"
-                    },
-                    {
-                        id: 2,
-                        firstName: "Sarah",
-                        lastName: "Samson",
-                        phone: "(555) 444-3333"
-                    },
-                    {
-                        id: 3,
-                        firstName: "Elijah",
-                        lastName: "Wood",
-                        phone: "(999) 888-7777"
-                    }
-                ];
+                vm.contacts = contactsService.getContacts();
+            }
+        }
+
+        function contactsService() {
+            var service = {
+                getContacts: getContacts
+            };
+
+            var contacts = [
+                {
+                    id: 1,
+                    firstName: "Joe",
+                    lastName: "Shmoe",
+                    phone: "(555) 123-4567"
+                },
+                {
+                    id: 2,
+                    firstName: "Sarah",
+                    lastName: "Samson",
+                    phone: "(555) 444-3333"
+                },
+                {
+                    id: 3,
+                    firstName: "Elijah",
+                    lastName: "Wood",
+                    phone: "(999) 888-7777"
+                }
+            ];
+
+            return service;
+
+            function getContacts() {
+                return contacts;
             }
         }
     })();
