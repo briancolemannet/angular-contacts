@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Phone
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="contact in vm.contacts">
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.firstName }}</td>
+                <td>{{ contact.lastName }}</td>
+                <td>{{ contact.phone }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
