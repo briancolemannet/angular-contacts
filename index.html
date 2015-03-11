@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Angular Contacts</a>
+            <a class="navbar-brand" href="#/">Angular Contacts</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -90,12 +90,28 @@
             }
         }
 
-        function CreateContactController() {
+        CreateContactController.$inject = ["contactsService"];
+
+        function CreateContactController(contactsService) {
             var vm = this;
+            vm.createContact = createContact;
 
             init();
 
             function init() {
+                vm.newContact = getBlankContact();
+            }
+
+            function createContact(newContact) {
+                if (newContact && newContact.firstName) {
+                    contactsService.createContact(newContact, function () {
+                        vm.newContact = getBlankContact();
+                    });
+                }
+            }
+
+            function getBlankContact() {
+                return {};
             }
         }
 
@@ -103,12 +119,21 @@
 
         function contactsService($http) {
             var service = {
-                getContacts: getContacts
+                getContacts: getContacts,
+                createContact: createContact
             };
 
             var contacts = null;
 
             return service;
+
+            function createContact(newContact, successCallback) {
+                contacts = contacts || [];
+                contacts.push(newContact);
+                if(angular.isFunction(successCallback)){
+                    successCallback();
+                }
+            }
 
             function getContacts(successCallback) {
                 if (angular.isFunction(successCallback)) {
