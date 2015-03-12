@@ -1,5 +1,9 @@
 <div class="row">
     <div class="col-sm-offset-1 col-sm-10">
+        <input class="pull-right" type="text" name="filter" id="Filter" ng-model="vm.filter"
+               placeholder="Filter contacts"/>
+    </div>
+    <div class="col-sm-offset-1 col-sm-10">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -11,7 +15,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="contact in vm.contacts">
+            <tr ng-repeat="contact in vm.contacts | filter: vm.filter">
                 <td>{{ contact.id }}</td>
                 <td>{{ contact.firstName }}</td>
                 <td>{{ contact.lastName }}</td>
