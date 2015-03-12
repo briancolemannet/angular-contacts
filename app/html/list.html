@@ -7,15 +7,14 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Phone
-                </th>
+                <th ng-click="vm.orderBy('id')">#</th>
+                <th ng-click="vm.orderBy('firstName')">First</th>
+                <th ng-click="vm.orderBy('lastName')">Last</th>
+                <th ng-click="vm.orderBy('phone')">Phone</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="contact in vm.contacts | filter: vm.filter">
+            <tr ng-repeat="contact in vm.contacts | orderBy: vm.predicate : vm.reverse | filter: vm.filter">
                 <td>{{ contact.id }}</td>
                 <td>{{ contact.firstName }}</td>
                 <td>{{ contact.lastName }}</td>

@@ -80,13 +80,27 @@
 
         function ContactListController(contactsService) {
             var vm = this;
+            vm.orderBy = orderBy;
 
             init();
 
             function init() {
+                vm.predicate = 'firstName';
+                vm.reverse = false;
+
                 contactsService.getContacts(function (data) {
                     vm.contacts = data;
                 });
+            }
+
+            function orderBy(pred) {
+                if (vm.predicate === pred) {
+                    vm.reverse = !vm.reverse;
+                }
+                else {
+                    vm.predicate = pred;
+                    vm.reverse = false;
+                }
             }
         }
 
